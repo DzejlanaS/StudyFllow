@@ -1,0 +1,51 @@
+import { Task } from "../types/Task";
+
+export const mockTasks: Task[] = [
+  {
+    id: 1,
+    title: "Complete Database Assignment",
+    description: "Finish the SQL database assignment and submit it.",
+    subject: "Database Systems",
+    dueDate: "2026-11-06",
+    priority: "High",
+    completed: false,
+    notes: "Review SQL joins and relationships.",
+  },
+  {
+    id: 2,
+    title: "Prepare for Programming Exam",
+    description: "Study JavaScript functions, arrays and objects.",
+    subject: "Programming",
+    dueDate: "2026-11-08",
+    priority: "High",
+    completed: false,
+  },
+  {
+    id: 3,
+    title: "Finish UI Design",
+    description: "Complete the mobile application interface.",
+    subject: "UI/UX Design",
+    dueDate: "2026-11-10",
+    priority: "Medium",
+    completed: false,
+    notes: "Use Figma for the final design.",
+  },
+  {
+    id: 4,
+    title: "Read Software Engineering Chapter",
+    description: "Read chapter four and prepare notes.",
+    subject: "Software Engineering",
+    dueDate: "2026-11-12",
+    priority: "Low",
+    completed: true,
+  },
+  {
+    id: 5,
+    title: "Submit Project Documentation",
+    description: "Prepare and submit the final project documentation.",
+    subject: "IT Project",
+    dueDate: "2026-11-15",
+    priority: "Medium",
+    completed: false,
+  },
+];

@@ -1,56 +1,100 @@
-# Welcome to your Expo app 👋
+# StudyFlow – Student Planner App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## Project Overview
 
-## Get started
+StudyFlow is a student planner mobile application developed using React Native and Expo. It helps university students organize their academic responsibilities, manage assignments, track exams, and monitor important deadlines.
 
-1. Install dependencies
+The application provides a simple way to manage academic tasks, organize them by subjects, set priorities, and track completed and pending activities.
 
-   ```bash
-   npm install
-   ```
+## Main Features
 
-2. Start the app
+- Display academic tasks and assignments.
+- View task descriptions and details.
+- Organize tasks by subjects.
+- Display task deadlines.
+- Set task priorities (Low, Medium, High).
+- Track completed and pending tasks.
+- Display task statistics.
+- Support optional notes for individual tasks.
 
-   ```bash
-   npx expo start
-   ```
+## Technologies Used
 
-In the output, you'll find options to open the app in a
+- React Native
+- Expo SDK 58
+- TypeScript
+- JavaScript
+- Git and GitHub
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Project Structure
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```text
+studyflow/
+├── src/
+│   ├── app/
+│   │   ├── _layout.tsx
+│   │   └── index.tsx
+│   ├── components/
+│   │   ├── TaskCard.tsx
+│   │   └── TaskDetails.tsx
+│   ├── data/
+│   │   └── tasks.ts
+│   ├── screens/
+│   │   └── TaskDetailsScreen.tsx
+│   └── types/
+│       └── Task.ts
+├── assets/
+├── app.json
+├── package.json
+└── README.md
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Getting Started
 
-### Other setup steps
+### 1. Clone the repository
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+```bash
+git clone https://github.com/DzejlanaS/StudyFllow.git
+```
 
-## Learn more
+### 2. Navigate to the project folder
 
-To learn more about developing your project with Expo, look at the following resources:
+```bash
+cd StudyFllow
+```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+### 3. Install dependencies
 
-## Join the community
+```bash
+npm install
+```
 
-Join our community of developers creating universal apps.
+### 4. Start the application
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+```bash
+npx expo start
+```
+
+Scan the QR code using Expo Go to open the application on a mobile device.
+
+To run the web version, press `w` in the Expo terminal.
+
+## Mock Data
+
+The application currently uses five sample academic tasks with different subjects, deadlines, priorities, and completion statuses.
+
+## Planned Features
+
+- [x] Initial application setup with Expo and TypeScript.
+- [x] Reusable TaskCard component.
+- [x] Task details component.
+- [x] Display academic tasks using mock data.
+- [x] Display task priorities and completion statuses.
+- [ ] Task navigation and details screen integration.
+- [ ] Add, edit, and delete tasks.
+- [ ] Search and filter tasks.
+- [ ] Local data persistence.
+- [ ] User authentication and backend integration.
+
+## Development
+
+This project is being developed as
