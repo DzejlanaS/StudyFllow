@@ -1,4 +1,5 @@
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import { useTheme } from "../hooks/useTheme";
 import { Task } from "../types/Task";
 
 type TaskCardProps = {
@@ -7,6 +8,8 @@ type TaskCardProps = {
 };
 
 export default function TaskCard({ task, onPress }: TaskCardProps) {
+  const { colors } = useTheme();
+
   const handlePress = () => {
     console.log("Task selected:", task.title);
     onPress?.();
@@ -16,6 +19,7 @@ export default function TaskCard({ task, onPress }: TaskCardProps) {
     <Pressable
       style={({ pressed }) => [
         styles.card,
+        { backgroundColor: colors.background },
         pressed && styles.pressed,
       ]}
       onPress={handlePress}
@@ -60,7 +64,6 @@ export default function TaskCard({ task, onPress }: TaskCardProps) {
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: "#FFFFFF",
     padding: 16,
     marginBottom: 14,
     borderRadius: 14,

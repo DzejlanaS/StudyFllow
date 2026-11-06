@@ -1,4 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
+import { useTheme } from "../hooks/useTheme";
 import { Task } from "../types/Task";
 
 type TaskDetailsProps = {
@@ -6,33 +7,52 @@ type TaskDetailsProps = {
 };
 
 export default function TaskDetails({ task }: TaskDetailsProps) {
+  const { colors } = useTheme();
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>{task.title}</Text>
+    <View
+      style={[
+        styles.container,
+        {
+          backgroundColor: colors.background,
+        },
+      ]}
+    >
+      <Text style={[styles.title, { color: colors.text }]}>
+        {task.title}
+      </Text>
 
       <View style={styles.section}>
         <Text style={styles.label}>Subject</Text>
-        <Text style={styles.value}>{task.subject}</Text>
+        <Text style={[styles.value, { color: colors.text }]}>
+          {task.subject}
+        </Text>
       </View>
 
       <View style={styles.section}>
         <Text style={styles.label}>Description</Text>
-        <Text style={styles.value}>{task.description}</Text>
+        <Text style={[styles.value, { color: colors.text }]}>
+          {task.description}
+        </Text>
       </View>
 
       <View style={styles.section}>
         <Text style={styles.label}>Due Date</Text>
-        <Text style={styles.value}>{task.dueDate}</Text>
+        <Text style={[styles.value, { color: colors.text }]}>
+          {task.dueDate}
+        </Text>
       </View>
 
       <View style={styles.section}>
         <Text style={styles.label}>Priority</Text>
-        <Text style={styles.value}>{task.priority}</Text>
+        <Text style={[styles.value, { color: colors.text }]}>
+          {task.priority}
+        </Text>
       </View>
 
       <View style={styles.section}>
         <Text style={styles.label}>Status</Text>
-        <Text style={styles.value}>
+        <Text style={[styles.value, { color: colors.text }]}>
           {task.completed ? "Completed" : "Pending"}
         </Text>
       </View>
@@ -40,7 +60,9 @@ export default function TaskDetails({ task }: TaskDetailsProps) {
       {task.notes && (
         <View style={styles.section}>
           <Text style={styles.label}>Notes</Text>
-          <Text style={styles.value}>{task.notes}</Text>
+          <Text style={[styles.value, { color: colors.text }]}>
+            {task.notes}
+          </Text>
         </View>
       )}
     </View>
@@ -49,7 +71,6 @@ export default function TaskDetails({ task }: TaskDetailsProps) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#FFFFFF",
     padding: 20,
     borderRadius: 14,
     margin: 15,
@@ -59,7 +80,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 22,
     fontWeight: "bold",
-    color: "#1E3A8A",
     marginBottom: 20,
   },
   section: {
@@ -73,6 +93,5 @@ const styles = StyleSheet.create({
   },
   value: {
     fontSize: 16,
-    color: "#1E293B",
   },
 });
