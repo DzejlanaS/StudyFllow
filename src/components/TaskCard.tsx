@@ -1,4 +1,11 @@
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import {
+  Image,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
+
 import { useTheme } from "../hooks/useTheme";
 import { Task } from "../types/Task";
 
@@ -7,7 +14,10 @@ type TaskCardProps = {
   onPress?: () => void;
 };
 
-export default function TaskCard({ task, onPress }: TaskCardProps) {
+export default function TaskCard({
+  task,
+  onPress,
+}: TaskCardProps) {
   const { colors } = useTheme();
 
   const handlePress = () => {
@@ -19,7 +29,10 @@ export default function TaskCard({ task, onPress }: TaskCardProps) {
     <Pressable
       style={({ pressed }) => [
         styles.card,
-        { backgroundColor: colors.background },
+        {
+          backgroundColor: colors.card,
+          borderColor: colors.muted,
+        },
         pressed && styles.pressed,
       ]}
       onPress={handlePress}
@@ -32,7 +45,14 @@ export default function TaskCard({ task, onPress }: TaskCardProps) {
             resizeMode="contain"
           />
 
-          <Text style={styles.title}>{task.title}</Text>
+          <Text
+            style={[
+              styles.title,
+              { color: colors.text },
+            ]}
+          >
+            {task.title}
+          </Text>
         </View>
 
         <Text
@@ -47,14 +67,40 @@ export default function TaskCard({ task, onPress }: TaskCardProps) {
         </Text>
       </View>
 
-      <Text style={styles.subject}>{task.subject}</Text>
+      <Text
+        style={[
+          styles.subject,
+          { color: colors.primary },
+        ]}
+      >
+        {task.subject}
+      </Text>
 
-      <Text style={styles.description}>{task.description}</Text>
+      <Text
+        style={[
+          styles.description,
+          { color: colors.muted },
+        ]}
+      >
+        {task.description}
+      </Text>
 
       <View style={styles.footer}>
-        <Text style={styles.date}>Due: {task.dueDate}</Text>
+        <Text
+          style={[
+            styles.date,
+            { color: colors.muted },
+          ]}
+        >
+          Due: {task.dueDate}
+        </Text>
 
-        <Text style={styles.status}>
+        <Text
+          style={[
+            styles.status,
+            { color: colors.text },
+          ]}
+        >
           {task.completed ? "Completed" : "Pending"}
         </Text>
       </View>
@@ -68,35 +114,39 @@ const styles = StyleSheet.create({
     marginBottom: 14,
     borderRadius: 14,
     borderWidth: 1,
-    borderColor: "#E5E7EB",
   },
+
   pressed: {
     opacity: 0.7,
     transform: [{ scale: 0.98 }],
   },
+
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     marginBottom: 8,
   },
+
   titleContainer: {
     flexDirection: "row",
     alignItems: "center",
     flex: 1,
     marginRight: 8,
   },
+
   image: {
     width: 30,
     height: 30,
     marginRight: 8,
   },
+
   title: {
     fontSize: 16,
     fontWeight: "bold",
-    color: "#1E293B",
     flex: 1,
   },
+
   priority: {
     fontSize: 12,
     fontWeight: "bold",
@@ -104,39 +154,43 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     overflow: "hidden",
   },
+
   high: {
     backgroundColor: "#FEE2E2",
     color: "#DC2626",
   },
+
   medium: {
     backgroundColor: "#FEF3C7",
     color: "#D97706",
   },
+
   low: {
     backgroundColor: "#DCFCE7",
     color: "#16A34A",
   },
+
   subject: {
     fontSize: 13,
-    color: "#2563EB",
     marginBottom: 6,
   },
+
   description: {
     fontSize: 14,
-    color: "#64748B",
     marginBottom: 12,
   },
+
   footer: {
     flexDirection: "row",
     justifyContent: "space-between",
   },
+
   date: {
     fontSize: 12,
-    color: "#64748B",
   },
+
   status: {
     fontSize: 12,
     fontWeight: "600",
-    color: "#475569",
   },
 });

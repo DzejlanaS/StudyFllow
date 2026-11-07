@@ -3,134 +3,269 @@ import {
   StyleSheet,
   Text,
   View,
+  useWindowDimensions,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import TaskCard from "../components/TaskCard";
 import { mockTasks } from "../data/tasks";
+import { useTheme } from "../hooks/useTheme";
 
 export default function Index() {
+  const { colors } = useTheme();
+  const { width } = useWindowDimensions();
+
   const completedTasks = mockTasks.filter(
     (task) => task.completed
   ).length;
 
   const pendingTasks = mockTasks.length - completedTasks;
 
+  const columns =
+    width >= 900 ? 3 : width >= 600 ? 2 : 1;
+
+  const horizontalPadding = width >= 600 ? 32 : 20;
+  const gap = 16;
+
+  const cardWidth =
+    columns === 1
+      ? "100%"
+      : (width -
+          horizontalPadding * 2 -
+          gap * (columns - 1)) /
+        columns;
+
   return (
-    <ScrollView style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.logo}>StudyFlow</Text>
-        <Text style={styles.subtitle}>
-          Your personal student planner
-        </Text>
-      </View>
+    <SafeAreaView
+      style={[
+        styles.safeArea,
+        { backgroundColor: colors.background },
+      ]}
+    >
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={[
+          styles.content,
+          { paddingHorizontal: horizontalPadding },
+        ]}
+      >
+        <View
+          style={[
+            styles.header,
+            { backgroundColor: colors.primary },
+          ]}
+        >
+          <Text style={styles.logo}>StudyFlow</Text>
 
-      <View style={styles.welcome}>
-        <Text style={styles.welcomeTitle}>
-          Welcome back!
-        </Text>
-        <Text style={styles.welcomeText}>
-          Stay organized and achieve your goals.
-        </Text>
-      </View>
-
-      <View style={styles.statsContainer}>
-        <View style={styles.statCard}>
-          <Text style={styles.statNumber}>
-            {mockTasks.length}
+          <Text style={styles.subtitle}>
+            Your personal student planner
           </Text>
-          <Text style={styles.statLabel}>Total Tasks</Text>
         </View>
 
-        <View style={styles.statCard}>
-          <Text style={styles.statNumber}>
-            {pendingTasks}
+        <View style={styles.welcome}>
+          <Text
+            style={[
+              styles.welcomeTitle,
+              { color: colors.text },
+            ]}
+          >
+            Welcome back!
           </Text>
-          <Text style={styles.statLabel}>Pending</Text>
+
+          <Text
+            style={[
+              styles.welcomeText,
+              { color: colors.muted },
+            ]}
+          >
+            Stay organized and achieve your goals.
+          </Text>
         </View>
 
-        <View style={styles.statCard}>
-          <Text style={styles.statNumber}>
-            {completedTasks}
-          </Text>
-          <Text style={styles.statLabel}>Completed</Text>
+        <View style={styles.statsContainer}>
+          <View
+            style={[
+              styles.statCard,
+              { backgroundColor: colors.card },
+            ]}
+          >
+            <Text
+              style={[
+                styles.statNumber,
+                { color: colors.primary },
+              ]}
+            >
+              {mockTasks.length}
+            </Text>
+
+            <Text
+              style={[
+                styles.statLabel,
+                { color: colors.muted },
+              ]}
+            >
+              Total Tasks
+            </Text>
+          </View>
+
+          <View
+            style={[
+              styles.statCard,
+              { backgroundColor: colors.card },
+            ]}
+          >
+            <Text
+              style={[
+                styles.statNumber,
+                { color: colors.primary },
+              ]}
+            >
+              {pendingTasks}
+            </Text>
+
+            <Text
+              style={[
+                styles.statLabel,
+                { color: colors.muted },
+              ]}
+            >
+              Pending
+            </Text>
+          </View>
+
+          <View
+            style={[
+              styles.statCard,
+              { backgroundColor: colors.card },
+            ]}
+          >
+            <Text
+              style={[
+                styles.statNumber,
+                { color: colors.primary },
+              ]}
+            >
+              {completedTasks}
+            </Text>
+
+            <Text
+              style={[
+                styles.statLabel,
+                { color: colors.muted },
+              ]}
+            >
+              Completed
+            </Text>
+          </View>
         </View>
-      </View>
 
-      <Text style={styles.sectionTitle}>My Tasks</Text>
+        <Text
+          style={[
+            styles.sectionTitle,
+            { color: colors.text },
+          ]}
+        >
+          My Tasks
+        </Text>
 
-      {mockTasks.map((task) => (
-        <TaskCard key={task.id} task={task} />
-      ))}
+        <View style={styles.tasksGrid}>
+          {mockTasks.map((task) => (
+            <View
+              key={task.id}
+              style={{ width: cardWidth }}
+            >
+              <TaskCard task={task} />
+            </View>
+          ))}
+        </View>
 
-      <View style={styles.bottomSpace} />
-    </ScrollView>
+        <View style={styles.bottomSpace} />
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+  },
+
   container: {
     flex: 1,
-    backgroundColor: "#F1F5F9",
-    padding: 20,
   },
+
+  content: {
+    paddingTop: 20,
+    paddingBottom: 20,
+  },
+
   header: {
-    backgroundColor: "#1E3A8A",
     padding: 24,
     borderRadius: 16,
-    marginTop: 40,
+    marginBottom: 25,
   },
+
   logo: {
     fontSize: 28,
     fontWeight: "bold",
     color: "#FFFFFF",
   },
+
   subtitle: {
     fontSize: 14,
     color: "#DBEAFE",
     marginTop: 5,
   },
+
   welcome: {
-    marginTop: 25,
     marginBottom: 20,
   },
+
   welcomeTitle: {
     fontSize: 23,
     fontWeight: "bold",
-    color: "#1E293B",
   },
+
   welcomeText: {
     fontSize: 14,
-    color: "#64748B",
     marginTop: 5,
   },
+
   statsContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
     marginBottom: 25,
   },
+
   statCard: {
-    backgroundColor: "#FFFFFF",
     padding: 15,
     borderRadius: 12,
     alignItems: "center",
     width: "31%",
   },
+
   statNumber: {
     fontSize: 24,
     fontWeight: "bold",
-    color: "#2563EB",
   },
+
   statLabel: {
     fontSize: 11,
-    color: "#64748B",
     marginTop: 5,
   },
+
   sectionTitle: {
     fontSize: 21,
     fontWeight: "bold",
-    color: "#1E293B",
     marginBottom: 15,
   },
+
+  tasksGrid: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 16,
+  },
+
   bottomSpace: {
     height: 30,
   },
