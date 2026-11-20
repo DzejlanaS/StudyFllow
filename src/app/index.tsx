@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import TaskCard from "../components/TaskCard";
+import TaskList from "../components/TaskList";
 import { mockTasks } from "../data/tasks";
 import { useTheme } from "../hooks/useTheme";
 
@@ -21,19 +21,7 @@ export default function Index() {
 
   const pendingTasks = mockTasks.length - completedTasks;
 
-  const columns =
-    width >= 900 ? 3 : width >= 600 ? 2 : 1;
-
   const horizontalPadding = width >= 600 ? 32 : 20;
-  const gap = 16;
-
-  const cardWidth =
-    columns === 1
-      ? "100%"
-      : (width -
-          horizontalPadding * 2 -
-          gap * (columns - 1)) /
-        columns;
 
   return (
     <SafeAreaView
@@ -46,8 +34,11 @@ export default function Index() {
         style={styles.container}
         contentContainerStyle={[
           styles.content,
-          { paddingHorizontal: horizontalPadding },
+          {
+            paddingHorizontal: horizontalPadding,
+          },
         ]}
+        showsVerticalScrollIndicator={false}
       >
         <View
           style={[
@@ -168,15 +159,8 @@ export default function Index() {
           My Tasks
         </Text>
 
-        <View style={styles.tasksGrid}>
-          {mockTasks.map((task) => (
-            <View
-              key={task.id}
-              style={{ width: cardWidth }}
-            >
-              <TaskCard task={task} />
-            </View>
-          ))}
+        <View style={styles.taskListContainer}>
+          <TaskList tasks={mockTasks} />
         </View>
 
         <View style={styles.bottomSpace} />
@@ -196,7 +180,7 @@ const styles = StyleSheet.create({
 
   content: {
     paddingTop: 20,
-    paddingBottom: 20,
+    paddingBottom: 30,
   },
 
   header: {
@@ -260,10 +244,8 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
 
-  tasksGrid: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    gap: 16,
+  taskListContainer: {
+    width: "100%",
   },
 
   bottomSpace: {
